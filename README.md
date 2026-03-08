@@ -71,10 +71,6 @@ npm run preview
 
 O front espera a API em **http://localhost:8000** (endpoint `POST /api/recognize-plate` com FormData, chave `file`). Para usar outra URL, crie um arquivo `.env` na raiz do projeto:
 
-```env
-VITE_API_URL=http://endereco-da-sua-api
-```
-
 O backend (Python/FastAPI) deve estar rodando para o envio e exibição dos resultados funcionarem.
 
 ---
