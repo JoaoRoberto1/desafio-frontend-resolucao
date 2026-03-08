@@ -56,7 +56,6 @@ npm run preview
 ### Interface
 
 - Tema escuro/claro conforme preferência do sistema.
-- **Footer fixo** na parte inferior da tela com crédito (“Desenvolvido por João Roberto”) e ícones de contato: LinkedIn, WhatsApp e e-mail (com cópia do e-mail ao clicar).
 
 ---
 
