@@ -1,16 +1,89 @@
-# React + Vite
+# Dashboard – Leitura de Placas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Front-end em **React** (Vite) para o desafio técnico de integração com a API de reconhecimento de placas por visão computacional.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Como rodar o projeto
 
-## React Compiler
+### 1. Instalar as dependências
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+No terminal, na pasta do projeto:
 
-## Expanding the ESLint configuration
+```bash
+npm install
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 2. Subir o servidor de desenvolvimento
+
+```bash
+npm run dev
+```
+
+O app abre no navegador (em geral em **http://localhost:5173**).
+
+### 3. (Opcional) Build para produção
+
+```bash
+npm run build
+```
+
+Os arquivos gerados ficam na pasta `dist/`. Para visualizar a build localmente:
+
+```bash
+npm run preview
+```
+
+---
+
+## O que o projeto possui
+
+### Funcionalidades principais
+
+- **Upload de imagem** – Área para clicar ou arrastar e soltar uma foto do veículo (com placa visível). Aceita formatos de imagem (JPG, PNG, etc.).
+- **Envio para a API** – Botão **"Enviar para análise"** que envia a imagem em `POST` para o endpoint da API (FormData com a chave `file`).
+- **Painel de resultado** – Exibe a **placa lida** e o **percentual de confiança** retornados pela API.
+- **Preview da imagem** – A imagem selecionada é exibida na tela antes e depois do envio (ao lado do resultado).
+- **Loading** – Mensagem e animação de “Processando...” enquanto a API processa a imagem.
+- **Tratamento de erros** – Mensagens claras quando a API está indisponível, há erro de rede ou a resposta é inválida.
+
+### Diferenciais
+
+- **Responsividade** – Layout adaptado para celular e tablet (breakpoint em 600px). Upload, resultado, tabela e gráfico se ajustam à largura da tela.
+- **Histórico da sessão** – As últimas leituras da sessão atual são guardadas em memória e exibidas em uma **tabela** com: número da leitura, placa, confiança (%) e horário (até 20 itens).
+- **Gráfico de confiança** – Uso da biblioteca **Recharts** para um gráfico de barras com a confiança de cada leitura e exibição da **média de confiança** das últimas leituras.
+
+### Interface
+
+- Tema escuro/claro conforme preferência do sistema.
+- **Footer fixo** na parte inferior da tela com crédito (“Desenvolvido por João Roberto”) e ícones de contato: LinkedIn, WhatsApp e e-mail (com cópia do e-mail ao clicar).
+
+---
+
+## Tecnologias
+
+- **React** + **Vite**
+- **Recharts** (gráficos)
+- CSS com variáveis e media queries para responsividade
+
+---
+
+## Integração com a API
+
+O front espera a API em **http://localhost:8000** (endpoint `POST /api/recognize-plate` com FormData, chave `file`). Para usar outra URL, crie um arquivo `.env` na raiz do projeto:
+
+```env
+VITE_API_URL=http://endereco-da-sua-api
+```
+
+O backend (Python/FastAPI) deve estar rodando para o envio e exibição dos resultados funcionarem.
+
+---
+
+## Contato
+
+**Desenvolvido por João Roberto**
+
+- **LinkedIn:** [linkedin.com/in/joão-roberto-de-oliveira-felix-780471296](https://www.linkedin.com/in/joão-roberto-de-oliveira-felix-780471296)
+- **WhatsApp:** [(85) 99198-4682](https://wa.me/5585991984682?text=Olá%2C%20vim%20pelo%20seu%20portfolio!)
+- **E-mail:** [joao.robertodof@gmail.com](mailto:joao.robertodof@gmail.com)
