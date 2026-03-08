@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import {
   BarChart,
   Bar,
@@ -21,6 +21,7 @@ function App() {
   const [error, setError] = useState(null)
   const [history, setHistory] = useState([])
   const [emailCopied, setEmailCopied] = useState(false)
+  const fileInputRef = useRef(null)
 
   const EMAIL = 'joao.robertodof@gmail.com'
 
@@ -52,6 +53,7 @@ function App() {
     }
     setFile(selected)
     setPreviewUrl(URL.createObjectURL(selected))
+    e.target.value = ''
   }, [previewUrl])
 
   const handleDrop = useCallback((e) => {
@@ -151,6 +153,7 @@ function App() {
           onDragOver={handleDragOver}
         >
           <input
+            ref={fileInputRef}
             type="file"
             id="file-input"
             accept="image/*"
@@ -159,7 +162,14 @@ function App() {
             aria-label="Selecionar imagem do veículo"
           />
           {previewUrl ? (
-            <div className="preview-wrap">
+            <div
+              className="preview-wrap"
+              onClick={() => fileInputRef.current?.click()}
+              onKeyDown={(e) => e.key === 'Enter' && fileInputRef.current?.click()}
+              role="button"
+              tabIndex={0}
+              aria-label="Trocar imagem"
+            >
               <img src={previewUrl} alt="Preview do veículo" className="preview-image" />
               <span className="preview-label">Clique ou arraste outra imagem para trocar</span>
             </div>
